@@ -1,10 +1,12 @@
 from core.Asiento import Asiento
 import tkinter as tk
+
+    
 class Sala:
     def __init__(self,numero,asientos):
         self.numero = numero
         self.asientos = asientos
-        self.botones = [[None]*9 for _ in range(9)]
+        self.botones = [[None]*10 for _ in range(8)]
         self.b=None
     
     def get_botones(self,boton,i,j):
@@ -19,8 +21,8 @@ class Sala:
             self.asientos[i][j].estado = False
             btn.config(bg="gray")
         cont=0
-        for h in range(9):
-            for l in range(9):
+        for h in range(8):
+            for l in range(10):
                 if self.asientos[h][l].estado:
                     cont+=1
         label.set(f"Asientos: {cont}\nCosto: ${cont * 15000}")
@@ -28,14 +30,14 @@ class Sala:
     def ventana_sala(self,root):
         ventana_asientos = tk.Toplevel(root)
         ventana_asientos.title("Selección de Asientos")
-        ventana_asientos.geometry("600x800")
+        ventana_asientos.geometry(f"900x650+250+30")
         ventana_asientos.config(bg="#1e1e1e")
         texto_info = tk.StringVar()
         # Título
-        tk.Label(ventana_asientos, text="Selección de Asientos", font=("Arial", 18), bg="#1e1e1e", fg="white").pack(pady=10)
+        tk.Label(ventana_asientos, text="Selección de Asientos", font=("Arial", 25,"bold"), bg="#1e1e1e", fg="white").pack(pady=10)
         # Indicador de Pantalla
         pantalla = tk.Frame(ventana_asientos, bg="#1e1e1e")
-        pantalla.pack(pady=(10, 0))
+        pantalla.pack(pady=(5, 0))
 
         pantalla_label = tk.Label(
             pantalla,
@@ -57,13 +59,13 @@ class Sala:
         # asientos
         grid_frame = tk.Frame(ventana_asientos, bg="#1e1e1e")
         grid_frame.pack(pady=10)
-        for i in range(9):
-            for j in range(9):
+        for i in range(8):
+            for j in range(10):
                 if not self.asientos[i][j].estado:
                     color="gray"
                 else:
                     color= "#147df5"
-                self.b = tk.Button(grid_frame, text=f"{i*9 + j + 1}", bg=color, fg="white", width=4, height=2)
+                self.b = tk.Button(grid_frame, text=f"{i*10 + j + 1}", bg=color, fg="white", width=4, height=2)
                 self.b.config(command=lambda i=i, j=j, btn=self.b: self.seleccionar_asiento(i, j, btn,texto_info))
                 
                 self.get_botones(self.b,i,j)
