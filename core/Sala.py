@@ -23,7 +23,7 @@ class Sala:
         cont=0
         for h in range(8):
             for l in range(10):
-                if self.asientos[h][l].estado:
+                if self.asientos[h][l].estado == True:
                     cont+=1
         label.set(f"Asientos: {cont}\nCosto: ${cont * 15000}")
 
@@ -59,24 +59,48 @@ class Sala:
         # asientos
         grid_frame = tk.Frame(ventana_asientos, bg="#1e1e1e")
         grid_frame.pack(pady=10)
+
         for i in range(8):
             for j in range(10):
-                if not self.asientos[i][j].estado:
-                    color="gray"
-                else:
-                    color= "#147df5"
-                self.b = tk.Button(grid_frame, text=f"{i*10 + j + 1}", bg=color, fg="white", width=4, height=2)
-                self.b.config(command=lambda i=i, j=j, btn=self.b: self.seleccionar_asiento(i, j, btn,texto_info))
+                if self.asientos[i][j].estado == "asignado":
+                    self.b = tk.Button(grid_frame, text=f"{i*10 + j + 1}", bg="Red", fg="white", width=4, height=2)
+                elif not self.asientos[i][j].estado:
+                    self.b = tk.Button(grid_frame, text=f"{i*10 + j + 1}", bg="grey", fg="white", width=4, height=2)
+                    self.b.config(command=lambda i=i, j=j, btn=self.b: self.seleccionar_asiento(i, j, btn,texto_info))
+                else: 
+                    self.b = tk.Button(grid_frame, text=f"{i*10 + j + 1}", bg="#147df5", fg="white", width=4, height=2)
+                    self.b.config(command=lambda i=i, j=j, btn=self.b: self.seleccionar_asiento(i, j, btn,texto_info))
                 
                 self.get_botones(self.b,i,j)
                 self.b.grid(row=i, column=j, padx=5, pady=5)
 
         # Info de selección
+
         tk.Label(ventana_asientos, textvariable=texto_info, fg="white", bg="#1e1e1e", font=("Arial", 12)).pack(pady=10)
 
         # Botones de acción
         botones_frame = tk.Frame(ventana_asientos, bg="#1e1e1e")
         botones_frame.pack()
 
-        tk.Button(botones_frame, text="Confirmar Compra", bg="#147df5", fg="white", width=20).pack(side="left", padx=10)
+        
         tk.Button(botones_frame, text="<< Volver", bg="gray", fg="white", width=15, command=ventana_asientos.withdraw).pack(side="right", padx=10)
+        tk.Button(botones_frame, text="Confirmar Compra", command= lambda: self.asiento_asignado(ventana_asientos) ,bg="#147df5", fg="white", width=20).pack(side="left", padx=10)
+    
+    def asiento_asignado(self,ventana_asientos):
+        for i in range(8):
+            for j in range(10):
+                if self.asientos[i][j].estado:
+                    self.asientos[i][j].estado = "asignado"
+        ventana_asientos.withdraw()
+    
+    def verificar_capacidad(self):
+        for i in range(8):
+            for j in range(10):
+                if self.asientos[i][j].estado == "asignado":
+                    lleno = True
+                else:
+                    lleno = False
+        if lleno:
+            return False
+        else:
+            return True
