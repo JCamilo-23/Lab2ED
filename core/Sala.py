@@ -27,6 +27,16 @@ class Sala:
                     cont+=1
         label.set(f"Asientos: {cont}\nCosto: ${cont * 15000}")
 
+    def resumen_ocupacion(self):
+        total_ocupados = 0
+        for fila in self.asientos:
+            for asiento in fila:
+                if asiento.estado == "asignado":
+                    total_ocupados += 1
+        ganancias = total_ocupados * 15000
+        return total_ocupados, ganancias
+
+
     def ventana_sala(self,root):
         ventana_asientos = tk.Toplevel(root)
         ventana_asientos.title("Selección de Asientos")
