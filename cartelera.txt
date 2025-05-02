@@ -1,10 +1,10 @@
 # Formato: SALA_ID;PELÍCULA;HORARIO;IMAGEN
 
-1;Harry Potter el mejor;14:00;Lab2/images/f1.png
-1t;Shrek;17:00;Lab2/images/f2.png
-2;Avatar: El Camino del Agua;18:00;Lab2/images/f3.png
-2t;Minecraft a movie;14:00;Lab2/images/f4.png
-3;Barbie;13:30;Lab2/images/f5.png
-3t;Spider-Man: No Way Home;16:30;Lab2/images/f6.png
-4;How to train your dragon;17:00;Lab2/images/f7.png
-4;Toy Story;17:00;Lab2/images/f8.png
+1;Harry Potter el mejor;00:30;True;images/f1.png
+1t;Shrek;17:00;True;images/f2.png
+2;Avatar: El Camino del Agua;18:00;True;images/f3.png
+2t;Doctor Strange en el Multiverso de la Locura;14:00;True;images/f4.png
+3;Barbie;13:30;True;images/f5.png
+3t;Spider-Man: No Way Home;16:30;True;images/f6.png
+4;How to train your dragon;17:00;True;images/f7.png
+4;Toy Story;20:00;True;images/f8.png
